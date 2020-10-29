@@ -1,0 +1,33 @@
+# env.yml
+
+# This is the configuration file of the entire pipeline
+# please update all and only the <placeholders> # bellow, 
+# Renaming any variable will cause start up issues ... 
+
+conf:
+    name: twit-sentiment-analysis
+
+    kafka:
+        topic: process
+
+func:
+    score_and_pad_tokens:
+        score_map_path: ../files/w2i.json
+        unknown: "*#*UNK*#*"
+        pad: "*#*PAD*#*"
+        model_input_len: 20
+    
+    predict_sentiment:
+        model_path: ../files/model.h5
+
+    store_to_csv:
+        file_path: ../files/output.csv
+        headers:
+            - created_at
+            - twit_id
+            - actual_text
+            - sentiment
+        delimeter: "|"
+        newline: ""
+        quote_mark: "'"
+        log_on_append: True

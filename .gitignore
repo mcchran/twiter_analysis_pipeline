@@ -1,0 +1,9 @@
+*credentials*
+*creds*
+*.pyc
+*.log
+*.csv
+*info
+*externals*
+files/*
+twitter_test_requests.txt
