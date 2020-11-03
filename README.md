@@ -143,4 +143,17 @@ Designed to be lean yet extensible
 ---------------------------------
 Extensibility is an interesting concept in the terms or processing pipelines. Here by invoking 
 two specialized abstractions the `Chain` and the `config_setup` we can build processing streams with
-ease. Thinking of the mathematical notation of functions... (TODO: explantion peding ....) 
+ease. Functions with multiple params are chained together into a pipeline that the output of one function
+if fed to the input of the next function. The issue in that case is that the codebase may be messed up by
+any params that do not relate to the pipeline but do define the pipeline itself.
+
+e.g.
+```python
+   def save_value_to_file(value_to_store, file_path):
+        ...
+```
+In the example above the pipeline operates on `value_to_store` while the `file_path`variable defines the pipeline itself
+To provide an extensible software architecture we introduced the `config_setup` decorator which is repsonsible to configure all
+function variables that define the pipeline given that they are registered under the corresponding yaml section.
+In this settings pipelines may be build with ease while multiple defintions of the  same pipeline may be provided 
+by just updating the related params in the config.yaml file. 
